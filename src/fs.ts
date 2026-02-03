@@ -25,13 +25,16 @@ const scanDirectoryEntry = async (entry: any): Promise<File[]> => {
       return result
     }
 
-    for (const se of subentries) {
-      if (se.isDirectory) {
-        const ses = await scanDirectoryEntry(se)
-        result.push(...ses)
+    const resolvedEntries = await Promise.all(
+      subentries.map((se) =>
+        se.isDirectory ? scanDirectoryEntry(se) : getAsFile(se),
+      ),
+    )
+    for (const entry of resolvedEntries) {
+      if (Array.isArray(entry)) {
+        result.push(...entry)
       } else {
-        const file = await getAsFile(se)
-        result.push(file)
+        result.push(entry)
       }
     }
   }
