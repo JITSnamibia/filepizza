@@ -234,8 +234,11 @@ export class RedisChannelRepo implements ChannelRepo {
     }
     const channelStr = serializeChannel(channel)
 
-    await this.client.setex(getLongSlugKey(longSlug), ttl, channelStr)
-    await this.client.setex(getShortSlugKey(shortSlug), ttl, channelStr)
+    await this.client
+      .pipeline()
+      .setex(getLongSlugKey(longSlug), ttl, channelStr)
+      .setex(getShortSlugKey(shortSlug), ttl, channelStr)
+      .exec()
 
     return channel
   }
@@ -244,12 +247,13 @@ export class RedisChannelRepo implements ChannelRepo {
     slug: string,
     scrubSecret = false,
   ): Promise<Channel | null> {
-    const shortChannelStr = await this.client.get(getShortSlugKey(slug))
+    const [shortChannelStr, longChannelStr] = await this.client.mget(
+      getShortSlugKey(slug),
+      getLongSlugKey(slug),
+    )
     if (shortChannelStr) {
       return deserializeChannel(shortChannelStr, scrubSecret)
     }
-
-    const longChannelStr = await this.client.get(getLongSlugKey(slug))
     if (longChannelStr) {
       return deserializeChannel(longChannelStr, scrubSecret)
     }
@@ -267,8 +271,11 @@ export class RedisChannelRepo implements ChannelRepo {
       return false
     }
 
-    await this.client.expire(getLongSlugKey(channel.longSlug), ttl)
-    await this.client.expire(getShortSlugKey(channel.shortSlug), ttl)
+    await this.client
+      .pipeline()
+      .expire(getLongSlugKey(channel.longSlug), ttl)
+      .expire(getShortSlugKey(channel.shortSlug), ttl)
+      .exec()
 
     return true
   }
@@ -279,8 +286,11 @@ export class RedisChannelRepo implements ChannelRepo {
       return
     }
 
-    await this.client.del(getLongSlugKey(channel.longSlug))
-    await this.client.del(getShortSlugKey(channel.shortSlug))
+    await this.client
+      .pipeline()
+      .del(getLongSlugKey(channel.longSlug))
+      .del(getShortSlugKey(channel.shortSlug))
+      .exec()
   }
 }
 
