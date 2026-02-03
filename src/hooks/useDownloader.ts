@@ -37,6 +37,9 @@ export function useDownloader(uploaderPeerID: string): {
   bytesDownloaded: number
 } {
   const { peer } = useWebRTCPeer()
+  const isDebug =
+    typeof window !== 'undefined' &&
+    window.localStorage.getItem('filepizza:debug') === 'true'
   const [dataConnection, setDataConnection] = useState<DataConnection | null>(
     null,
   )
@@ -54,15 +57,31 @@ export function useDownloader(uploaderPeerID: string): {
   const [isDone, setDone] = useState(false)
   const [bytesDownloaded, setBytesDownloaded] = useState(0)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const pendingBytes = useRef(0)
+  const bytesAnimationFrame = useRef<number | null>(null)
+
+  useEffect(() => {
+    return () => {
+      if (bytesAnimationFrame.current !== null) {
+        window.cancelAnimationFrame(bytesAnimationFrame.current)
+        bytesAnimationFrame.current = null
+      }
+      pendingBytes.current = 0
+    }
+  }, [])
 
   useEffect(() => {
     if (!peer) return
-    console.log('[Downloader] connecting to uploader', uploaderPeerID)
+    if (isDebug) {
+      console.log('[Downloader] connecting to uploader', uploaderPeerID)
+    }
     const conn = peer.connect(uploaderPeerID, { reliable: true })
     setDataConnection(conn)
 
     const handleOpen = () => {
-      console.log('[Downloader] connection opened')
+      if (isDebug) {
+        console.log('[Downloader] connection opened')
+      }
       setIsConnected(true)
       conn.send({
         type: MessageType.RequestInfo,
@@ -78,7 +97,9 @@ export function useDownloader(uploaderPeerID: string): {
     const handleData = (data: unknown) => {
       try {
         const message = decodeMessage(data)
-        console.log('[Downloader] received message', message.type)
+        if (isDebug) {
+          console.log('[Downloader] received message', message.type)
+        }
         switch (message.type) {
           case MessageType.PasswordRequired:
             setIsPasswordRequired(true)
@@ -98,7 +119,9 @@ export function useDownloader(uploaderPeerID: string): {
             conn.close()
             break
           case MessageType.Report:
-            console.log('[Downloader] received report message, redirecting')
+            if (isDebug) {
+              console.log('[Downloader] received report message, redirecting')
+            }
             window.location.href = '/reported'
             break
         }
@@ -108,7 +131,9 @@ export function useDownloader(uploaderPeerID: string): {
     }
 
     const handleClose = () => {
-      console.log('[Downloader] connection closed')
+      if (isDebug) {
+        console.log('[Downloader] connection closed')
+      }
       setRotating(false)
       setDataConnection(null)
       setIsConnected(false)
@@ -129,7 +154,9 @@ export function useDownloader(uploaderPeerID: string): {
     peer.on('error', handleError)
 
     return () => {
-      console.log('[Downloader] cleaning up connection')
+      if (isDebug) {
+        console.log('[Downloader] cleaning up connection')
+      }
       if (conn.open) {
         conn.close()
       } else {
@@ -144,23 +171,27 @@ export function useDownloader(uploaderPeerID: string): {
       conn.off('close', handleClose)
       peer.off('error', handleError)
     }
-  }, [peer])
+  }, [isDebug, peer, uploaderPeerID])
 
   const submitPassword = useCallback(
     (pass: string) => {
       if (!dataConnection) return
-      console.log('[Downloader] submitting password')
+      if (isDebug) {
+        console.log('[Downloader] submitting password')
+      }
       dataConnection.send({
         type: MessageType.UsePassword,
         password: pass,
       } as z.infer<typeof Message>)
     },
-    [dataConnection],
+    [dataConnection, isDebug],
   )
 
   const startDownload = useCallback(() => {
     if (!filesInfo || !dataConnection) return
-    console.log('[Downloader] starting download')
+    if (isDebug) {
+      console.log('[Downloader] starting download')
+    }
     setIsDownloading(true)
 
     const fileStreamByPath: Record<
@@ -189,10 +220,12 @@ export function useDownloader(uploaderPeerID: string): {
     let nextFileIndex = 0
     const startNextFileOrFinish = () => {
       if (nextFileIndex >= filesInfo.length) return
-      console.log(
-        '[Downloader] starting next file:',
-        filesInfo[nextFileIndex].fileName,
-      )
+      if (isDebug) {
+        console.log(
+          '[Downloader] starting next file:',
+          filesInfo[nextFileIndex].fileName,
+        )
+      }
       dataConnection.send({
         type: MessageType.Start,
         fileName: filesInfo[nextFileIndex].fileName,
@@ -214,12 +247,21 @@ export function useDownloader(uploaderPeerID: string): {
         chunkCountByFile[message.fileName] = 0
       }
       chunkCountByFile[message.fileName]++
-      console.log(
-        `[Downloader] received chunk ${chunkCountByFile[message.fileName]} for ${message.fileName} (${message.offset}-${message.offset + (message.bytes as ArrayBuffer).byteLength}) final=${message.final}`,
-      )
+      if (isDebug) {
+        console.log(
+          `[Downloader] received chunk ${chunkCountByFile[message.fileName]} for ${message.fileName} (${message.offset}-${message.offset + (message.bytes as ArrayBuffer).byteLength}) final=${message.final}`,
+        )
+      }
 
       const chunkSize = (message.bytes as ArrayBuffer).byteLength
-      setBytesDownloaded((bd) => bd + chunkSize)
+      pendingBytes.current += chunkSize
+      if (bytesAnimationFrame.current === null) {
+        bytesAnimationFrame.current = window.requestAnimationFrame(() => {
+          setBytesDownloaded((bd) => bd + pendingBytes.current)
+          pendingBytes.current = 0
+          bytesAnimationFrame.current = null
+        })
+      }
       fileStream.enqueue(new Uint8Array(message.bytes as ArrayBuffer))
 
       // Send acknowledgment to uploader
@@ -230,14 +272,18 @@ export function useDownloader(uploaderPeerID: string): {
         bytesReceived: chunkSize,
       }
       dataConnection.send(ackMessage)
-      console.log(
-        `[Downloader] sent ack for chunk ${chunkCountByFile[message.fileName]} (${message.offset}, ${chunkSize} bytes)`,
-      )
+      if (isDebug) {
+        console.log(
+          `[Downloader] sent ack for chunk ${chunkCountByFile[message.fileName]} (${message.offset}, ${chunkSize} bytes)`,
+        )
+      }
 
       if (message.final) {
-        console.log(
-          `[Downloader] finished receiving ${message.fileName} after ${chunkCountByFile[message.fileName]} chunks`,
-        )
+        if (isDebug) {
+          console.log(
+            `[Downloader] finished receiving ${message.fileName} after ${chunkCountByFile[message.fileName]} chunks`,
+          )
+        }
         fileStream.close()
         startNextFileOrFinish()
       }
@@ -256,7 +302,9 @@ export function useDownloader(uploaderPeerID: string): {
 
     downloadPromise
       .then(() => {
-        console.log('[Downloader] all files downloaded')
+        if (isDebug) {
+          console.log('[Downloader] all files downloaded')
+        }
         dataConnection.send({ type: MessageType.Done } as z.infer<
           typeof Message
         >)
@@ -265,12 +313,14 @@ export function useDownloader(uploaderPeerID: string): {
       .catch((err) => console.error('[Downloader] download error:', err))
 
     startNextFileOrFinish()
-  }, [dataConnection, filesInfo])
+  }, [dataConnection, filesInfo, isDebug])
 
   const stopDownload = useCallback(() => {
     // TODO(@kern): Continue here with stop / pause logic
     if (dataConnection) {
-      console.log('[Downloader] pausing download')
+      if (isDebug) {
+        console.log('[Downloader] pausing download')
+      }
       dataConnection.send({ type: MessageType.Pause })
       dataConnection.close()
     }
@@ -283,7 +333,7 @@ export function useDownloader(uploaderPeerID: string): {
     // Object.values(fileStreamByPath).forEach((stream) => stream.cancel())
     // Object.keys(fileStreamByPath).forEach((key) => delete fileStreamByPath[key])
     //   }, [dataConnection, fileStreams, fileStreamByPath])
-  }, [dataConnection])
+  }, [dataConnection, isDebug])
 
   return {
     filesInfo,
