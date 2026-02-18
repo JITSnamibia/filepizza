@@ -50,10 +50,10 @@ $ pnpm docker:down
 The server can be customized with the following environment variables:
 
 - `REDIS_URL` – Connection string for a Redis instance used to store channel metadata. If not set, FilePizza falls back to in-memory storage.
-- `COTURN_ENABLED` – When set to `true`, enables TURN support for connecting peers behind NAT.
-- `TURN_HOST` – Hostname or IP address of the TURN server. Defaults to `127.0.0.1`.
-- `TURN_REALM` – Realm used when generating TURN credentials. Defaults to `file.pizza`.
-- `STUN_SERVER` – STUN server URL to use when `COTURN_ENABLED` is disabled. Defaults to `stun:stun.l.google.com:19302`.
+- `CLOUDFLARE_TURN_KEY_ID` – Cloudflare Realtime TURN key ID used to request temporary ICE credentials server-side.
+- `CLOUDFLARE_TURN_API_TOKEN` – Cloudflare API token used with the TURN key ID. Keep this server-side only.
+- `CLOUDFLARE_TURN_TTL` – TTL (seconds) for generated Cloudflare TURN credentials. Defaults to `3600`.
+- `STUN_SERVER` – STUN server URL fallback when Cloudflare credentials are not configured. Defaults to `stun:stun.l.google.com:19302`.
 - `PEERJS_HOST` – Hostname or IP address to the self-hosted PeerJS server. Defaults to `0.peerjs.com`.
 - `PEERJS_PATH` – Path to self-hosted PeerJS server. Defaults to `/`.
 
