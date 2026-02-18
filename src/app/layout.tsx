@@ -8,12 +8,12 @@ import { ViewTransitions } from 'next-view-transitions'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
 export const metadata = {
-  title: 'JitsLabs Share • Secure browser file transfers.',
+  title: 'Simple Share • Secure browser file transfers.',
   description: 'Peer-to-peer file transfers in your web browser.',
   charSet: 'utf-8',
   openGraph: {
     url: 'https://share.jitslabs.org',
-    title: 'JitsLabs Share • Secure browser file transfers.',
+    title: 'Simple Share • Secure browser file transfers.',
     description: 'Peer-to-peer file transfers in your web browser.',
     images: [{ url: 'https://share.jitslabs.org/images/fb.png' }],
   },

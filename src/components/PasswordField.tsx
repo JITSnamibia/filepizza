@@ -35,7 +35,7 @@ export default function PasswordField({
             ? 'border-stone-500 dark:border-stone-400'
             : 'border-stone-300 dark:border-stone-600'
         } bg-white dark:bg-stone-900 text-stone-900 dark:text-stone-100`}
-        placeholder="Enter a secret password for this JitsLabs Share link..."
+        placeholder="Enter a secret password for this Simple Share link..."
         value={value}
         onChange={handleChange}
       />

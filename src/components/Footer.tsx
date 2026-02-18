@@ -36,7 +36,7 @@ export function Footer(): JSX.Element {
         <div className="flex flex-col items-center space-y-1 px-4 sm:px-6 md:px-8">
           <div className="flex items-center space-x-2">
             <p className="text-stone-600 dark:text-stone-400">
-              <strong>Like JitsLabs Share?</strong> Help support its development!{' '}
+              <strong>Like Simple Share?</strong> Help support its development!{' '}
             </p>
             <button
               className="px-1.5 py-0.5 bg-stone-900 text-stone-50 dark:bg-stone-100 dark:text-stone-900 rounded-md hover:opacity-90 transition-colors duration-200 font-medium text-[10px]"

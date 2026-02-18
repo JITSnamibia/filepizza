@@ -18,10 +18,10 @@ export default function ReportedPage(): JSX.Element {
         <p className="text-sm text-stone-600 dark:text-stone-300 leading-relaxed mb-6">
           This transfer has been paused for a potential violation of our terms
           of service. Our trust and safety team is reviewing it to help keep
-          JitsLabs Share secure for everyone.
+          Simple Share secure for everyone.
         </p>
         <div className="text-sm text-stone-500 dark:text-stone-400 italic">
-          - The JitsLabs Share Team
+          - The Simple Share Team
         </div>
       </div>
 

@@ -93,7 +93,7 @@ export default function ReportTermsViolationButton({
 
             <div className="space-y-4 text-stone-700 dark:text-stone-300">
               <p>
-                Before reporting this transfer, please review the JitsLabs Share terms:
+                Before reporting this transfer, please review the Simple Share terms:
               </p>
 
               <ul className="list-none space-y-3">

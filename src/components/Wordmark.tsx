@@ -4,10 +4,10 @@ export default function Wordmark(): JSX.Element {
   return (
     <h1
       className="text-5xl sm:text-6xl font-black tracking-tight text-stone-900 dark:text-stone-100"
-      aria-label="JitsLabs Share logo"
+      aria-label="Simple Share logo"
       role="img"
     >
-      JitsLabs Share
+      Simple Share
     </h1>
   )
 }

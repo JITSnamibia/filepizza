@@ -51,7 +51,7 @@ describe('Downloader subcomponents', () => {
       <PasswordEntry errorMessage={null} onSubmit={(v) => (submitted = v)} />,
     )
     fireEvent.change(
-      getByPlaceholderText('Enter a secret password for this JitsLabs Share link...'),
+      getByPlaceholderText('Enter a secret password for this Simple Share link...'),
       { target: { value: 'secret' } },
     )
     fireEvent.submit(getByText('Unlock'))

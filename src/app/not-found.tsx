@@ -5,8 +5,8 @@ import ReturnHome from '../components/ReturnHome'
 import TitleText from '../components/TitleText'
 
 export const metadata = {
-  title: 'JitsLabs Share - 404: Link Not Found',
-  description: 'Oops! This JitsLabs Share link seems to be missing.',
+  title: 'Simple Share - 404: Link Not Found',
+  description: 'Oops! This Simple Share link seems to be missing.',
 }
 
 export default async function NotFound(): Promise<JSX.Element> {
@@ -14,7 +14,7 @@ export default async function NotFound(): Promise<JSX.Element> {
     <div className="flex flex-col items-center space-y-5 py-10 max-w-2xl mx-auto">
       <Spinner direction="down" />
       <Wordmark />
-      <TitleText>404: This JitsLabs Share link is no longer available!</TitleText>
+      <TitleText>404: This Simple Share link is no longer available!</TitleText>
       <ReturnHome />
     </div>
   )

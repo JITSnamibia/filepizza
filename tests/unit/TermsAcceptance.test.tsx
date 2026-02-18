@@ -8,6 +8,6 @@ describe('TermsAcceptance', () => {
   it('opens modal', () => {
     const { getByText } = render(<TermsAcceptance />)
     fireEvent.click(getByText('our terms'))
-    expect(getByText('JitsLabs Share Terms')).toBeInTheDocument()
+    expect(getByText('Simple Share Terms')).toBeInTheDocument()
   })
 })

@@ -105,7 +105,7 @@ function UploadingState({
         You are uploading {pluralize(uploadedFiles.length, 'file', 'files')}.
       </TitleText>
       <SubtitleText>
-        Leave this tab open. JitsLabs Share does not store files.
+        Leave this tab open. Simple Share does not store files.
       </SubtitleText>
       <UploadFileList files={fileListData} />
       <WebRTCPeerProvider>
