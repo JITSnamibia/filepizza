@@ -6,6 +6,7 @@ import { ModeToggle } from '../components/ModeToggle'
 import FilePizzaQueryClientProvider from '../components/QueryClientProvider'
 import { Viewport } from 'next'
 import { ViewTransitions } from 'next-view-transitions'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 export const metadata = {
   title: 'FilePizza • Your files, delivered.',
@@ -42,6 +43,7 @@ export default function RootLayout({
               <ModeToggle />
             </FilePizzaQueryClientProvider>
           </ThemeProvider>
+          <SpeedInsights />
         </body>
       </html>
     </ViewTransitions>
