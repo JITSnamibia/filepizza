@@ -13,24 +13,24 @@ export default function ProgressBar({
   return (
     <div
       id="progress-bar"
-      className="w-full h-12 bg-stone-200 dark:bg-stone-700 rounded-md overflow-hidden relative shadow-sm"
+      className="w-full h-12 bg-stone-300/70 dark:bg-stone-900 rounded-md overflow-hidden relative border border-stone-300 dark:border-stone-700"
     >
       <div className="absolute inset-0 flex items-center justify-center">
-        <span className="text-black font-bold">{Math.round(percentage)}%</span>
+        <span className="text-stone-900 dark:text-stone-100 font-bold">{Math.round(percentage)}%</span>
       </div>
       <div
         id="progress-bar-fill"
         className={`h-full ${
           isComplete
-            ? 'bg-linear-to-b from-green-500 to-green-600'
-            : 'bg-linear-to-b from-blue-500 to-blue-600'
+            ? 'bg-stone-900 dark:bg-stone-100'
+            : 'bg-stone-700 dark:bg-stone-300'
         } transition-all duration-300 ease-in-out`}
         style={{ width: `${percentage}%` }}
       />
       <div className="absolute inset-0 flex items-center justify-center">
         <span
           id="progress-percentage"
-          className="text-white font-bold text-shadow"
+          className="text-stone-100 dark:text-stone-900 font-bold"
         >
           {Math.round(percentage)}%
         </span>

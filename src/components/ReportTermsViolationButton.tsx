@@ -65,7 +65,7 @@ export default function ReportTermsViolationButton({
       <div className="flex justify-center">
         <button
           onClick={() => setShowModal(true)}
-          className="text-sm text-red-600 dark:text-red-400 hover:underline transition-colors duration-200"
+          className="text-sm text-stone-600 dark:text-stone-400 hover:underline transition-colors duration-200"
           aria-label="Report terms violation"
         >
           Report suspicious transfer
@@ -128,7 +128,7 @@ export default function ReportTermsViolationButton({
               <button
                 disabled={isReporting}
                 onClick={handleReport}
-                className={`px-4 py-2 bg-linear-to-b from-red-500 to-red-600 text-white rounded-md border border-red-600 shadow-sm text-shadow disabled:opacity-50 disabled:cursor-not-allowed enabled:hover:from-red-500 enabled:hover:to-red-700 enabled:hover:shadow-md transition-all duration-200`}
+                className={`px-4 py-2 bg-stone-900 text-stone-50 dark:bg-stone-100 dark:text-stone-900 rounded-md border border-stone-700 dark:border-stone-300 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed enabled:hover:opacity-90 transition-all duration-200`}
                 aria-label="Confirm report"
               >
                 {isReporting ? 'Reporting...' : 'Report'}

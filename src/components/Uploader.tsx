@@ -53,7 +53,7 @@ export default function Uploader({
   return (
     <>
       <div className="flex w-full items-center">
-        <div className="flex-none mr-4 bg-white p-2">
+        <div className="flex-none mr-4 bg-stone-100 dark:bg-stone-900 border border-stone-300 dark:border-stone-700 p-2 rounded-md">
           <QRCode value={shortURL ?? ''} size={QR_CODE_SIZE} />
         </div>
         <div className="flex-auto flex flex-col justify-center space-y-2">
@@ -63,7 +63,7 @@ export default function Uploader({
       </div>
       <div className="mt-6 pt-4 border-t border-stone-200 dark:border-stone-700 w-full">
         <div className="flex justify-between items-center mb-2">
-          <h2 className="text-lg font-semibold text-stone-400 dark:text-stone-200">
+          <h2 className="text-lg font-semibold text-stone-700 dark:text-stone-200">
             {activeDownloaders} Downloading, {connections.length} Total
           </h2>
           <StopButton onClick={handleStop} />

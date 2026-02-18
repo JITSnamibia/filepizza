@@ -8,7 +8,7 @@ export default function UnlockButton({
   return (
     <button
       onClick={onClick}
-      className="px-4 py-2 bg-linear-to-b from-green-500 to-green-600 text-white rounded-md hover:from-green-500 hover:to-green-700 transition-all duration-200 border border-green-600 shadow-sm hover:shadow-md text-shadow"
+      className="px-4 py-2 rounded-md border border-stone-300 dark:border-stone-600 bg-stone-900 text-stone-50 dark:bg-stone-100 dark:text-stone-900 hover:opacity-90 transition-all duration-200 shadow-sm"
     >
       Unlock
     </button>

@@ -39,7 +39,7 @@ export function Footer(): JSX.Element {
               <strong>Like JitsLabs Share?</strong> Help support its development!{' '}
             </p>
             <button
-              className="px-1.5 py-0.5 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors duration-200 font-medium text-[10px]"
+              className="px-1.5 py-0.5 bg-stone-900 text-stone-50 dark:bg-stone-100 dark:text-stone-900 rounded-md hover:opacity-90 transition-colors duration-200 font-medium text-[10px]"
               onClick={handleDonate}
             >
               Donate
