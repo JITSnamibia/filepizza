@@ -1,5 +1,4 @@
 import React from 'react'
-import Footer from '../components/Footer'
 import '../styles.css'
 import { ThemeProvider } from '../components/ThemeProvider'
 import { ModeToggle } from '../components/ModeToggle'
@@ -39,7 +38,6 @@ export default function RootLayout({
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <JitsLabsShareQueryClientProvider>
               <main>{children}</main>
-              <Footer />
               <ModeToggle />
             </JitsLabsShareQueryClientProvider>
           </ThemeProvider>
