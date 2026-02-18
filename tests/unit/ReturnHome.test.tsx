@@ -9,6 +9,6 @@ import ReturnHome from '../../src/components/ReturnHome'
 describe('ReturnHome', () => {
   it('links to home', () => {
     const { getByText } = render(<ReturnHome />)
-    expect(getByText(/Serve up/).getAttribute('href')).toBe('/')
+    expect(getByText(/Start a new secure transfer/).getAttribute('href')).toBe('/')
   })
 })

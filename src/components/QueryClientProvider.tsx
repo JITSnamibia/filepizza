@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const queryClient = new QueryClient()
 
-export default function FilePizzaQueryClientProvider({
+export default function JitsLabsShareQueryClientProvider({
   children,
 }: {
   children: React.ReactNode

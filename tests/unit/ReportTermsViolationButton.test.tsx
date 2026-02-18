@@ -2,7 +2,7 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
-import FilePizzaQueryClientProvider from '../../src/components/QueryClientProvider'
+import JitsLabsShareQueryClientProvider from '../../src/components/QueryClientProvider'
 
 vi.mock('../../src/components/WebRTCProvider', () => ({
   useWebRTCPeer: () => ({ peer: { connect: vi.fn(() => ({ on: vi.fn(), close: vi.fn() })) } }),
@@ -13,11 +13,11 @@ import ReportTermsViolationButton from '../../src/components/ReportTermsViolatio
 describe('ReportTermsViolationButton', () => {
   it('opens modal on click', () => {
     const { getByText } = render(
-      <FilePizzaQueryClientProvider>
+      <JitsLabsShareQueryClientProvider>
         <ReportTermsViolationButton uploaderPeerID="peer" slug="slug" />
-      </FilePizzaQueryClientProvider>,
+      </JitsLabsShareQueryClientProvider>,
     )
-    fireEvent.click(getByText('Report suspicious pizza delivery'))
+    fireEvent.click(getByText('Report suspicious transfer'))
     expect(getByText('Found a suspicious delivery?')).toBeInTheDocument()
   })
 })

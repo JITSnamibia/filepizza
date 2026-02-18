@@ -21,7 +21,7 @@ const cleanErrorMessage = (errorMessage: string): string =>
     ? 'Could not connect to the uploader. Did they close their browser?'
     : errorMessage
 
-const getZipFilename = (): string => `filepizza-download-${Date.now()}.zip`
+const getZipFilename = (): string => `jitslabs-share-download-${Date.now()}.zip`
 
 export function useDownloader(uploaderPeerID: string): {
   filesInfo: Array<{ fileName: string; size: number; type: string }> | null

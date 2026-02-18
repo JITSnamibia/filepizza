@@ -13,7 +13,7 @@ function Pizza({ isRotating }: { isRotating?: boolean }): JSX.Element {
       className={isRotating ? 'animate-spin-slow' : ''}
       xmlns="http://www.w3.org/2000/svg"
       role="img"
-      aria-label={isRotating ? 'Rotating pizza' : 'Pizza'}
+      aria-label={isRotating ? 'Rotating transfer icon' : 'Transfer icon'}
     >
       <path
         fillRule="evenodd"

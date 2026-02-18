@@ -12,7 +12,7 @@ describe('Spinner', () => {
     act(() => { setRotating(true) })
 // @ts-ignore
     const { getByLabelText } = render(<Spinner />)
-    expect(getByLabelText('Rotating pizza')).toBeInTheDocument()
+    expect(getByLabelText('Rotating transfer icon')).toBeInTheDocument()
     // @ts-ignore
     act(() => { setRotating(false) })
   })

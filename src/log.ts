@@ -1,7 +1,7 @@
 import debug from 'debug'
 
-export const error = debug('filepizza:error')
+export const error = debug('jitslabs-share:error')
 
-export const info = debug('filepizza:info')
+export const info = debug('jitslabs-share:info')
 
-export const warn = debug('filepizza:warn')
+export const warn = debug('jitslabs-share:warn')

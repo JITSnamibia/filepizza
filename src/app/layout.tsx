@@ -3,20 +3,20 @@ import Footer from '../components/Footer'
 import '../styles.css'
 import { ThemeProvider } from '../components/ThemeProvider'
 import { ModeToggle } from '../components/ModeToggle'
-import FilePizzaQueryClientProvider from '../components/QueryClientProvider'
+import JitsLabsShareQueryClientProvider from '../components/QueryClientProvider'
 import { Viewport } from 'next'
 import { ViewTransitions } from 'next-view-transitions'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
 export const metadata = {
-  title: 'FilePizza • Your files, delivered.',
+  title: 'JitsLabs Share • Secure browser file transfers.',
   description: 'Peer-to-peer file transfers in your web browser.',
   charSet: 'utf-8',
   openGraph: {
-    url: 'https://file.pizza',
-    title: 'FilePizza • Your files, delivered.',
+    url: 'https://share.jitslabs.org',
+    title: 'JitsLabs Share • Secure browser file transfers.',
     description: 'Peer-to-peer file transfers in your web browser.',
-    images: [{ url: 'https://file.pizza/images/fb.png' }],
+    images: [{ url: 'https://share.jitslabs.org/images/fb.png' }],
   },
 }
 
@@ -37,11 +37,11 @@ export default function RootLayout({
       <html lang="en" suppressHydrationWarning>
         <body>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <FilePizzaQueryClientProvider>
+            <JitsLabsShareQueryClientProvider>
               <main>{children}</main>
               <Footer />
               <ModeToggle />
-            </FilePizzaQueryClientProvider>
+            </JitsLabsShareQueryClientProvider>
           </ThemeProvider>
           <SpeedInsights />
         </body>

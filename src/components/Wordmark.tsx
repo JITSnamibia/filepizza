@@ -9,7 +9,7 @@ export default function Wordmark(): JSX.Element {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className="h-12 w-auto text-red-600 dark:brightness-0 dark:invert"
-      aria-label="FilePizza logo"
+      aria-label="JitsLabs Share logo"
       role="img"
     >
       <path

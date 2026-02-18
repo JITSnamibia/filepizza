@@ -35,7 +35,7 @@ export default function PasswordField({
             ? 'border-red-500 dark:border-red-400'
             : 'border-stone-300 dark:border-stone-600'
         } bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100`}
-        placeholder="Enter a secret password for this slice of FilePizza..."
+        placeholder="Enter a secret password for this JitsLabs Share link..."
         value={value}
         onChange={handleChange}
       />

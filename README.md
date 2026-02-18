@@ -1,12 +1,12 @@
-<a href="https://xkcd.com/949/"><img src="http://imgs.xkcd.com/comics/file_transfer.png" alt="XKCD 949" width="30%" align="right" /></a> <img src="public/images/wordmark.png" alt="FilePizza wordmark" width="50%" /> <h3>Peer-to-peer file transfers in your browser</h3>
+<a href="https://xkcd.com/949/"><img src="http://imgs.xkcd.com/comics/file_transfer.png" alt="XKCD 949" width="30%" align="right" /></a> <img src="public/images/wordmark.png" alt="JitsLabs Share wordmark" width="50%" /> <h3>Peer-to-peer file transfers in your browser</h3>
 
 *Cooked up by [Alex Kern](https://kern.io) & [Neeraj Baid](https://github.com/neerajbaid) while eating Sliver @ UC Berkeley.*
 
-Using [WebRTC](http://www.webrtc.org), FilePizza eliminates the initial upload step required by other web-based file sharing services. Because data is never stored in an intermediary server, the transfer is fast, private, and secure.
+Using [WebRTC](http://www.webrtc.org), JitsLabs Share eliminates the initial upload step required by other web-based file sharing services. Because data is never stored in an intermediary server, the transfer is fast, private, and secure.
 
-A hosted instance of FilePizza is available at [file.pizza](https://file.pizza).
+A hosted instance of JitsLabs Share is available at [share.jitslabs.org](https://share.jitslabs.org).
 
-## What's new with FilePizza v2
+## What's new with JitsLabs Share
 
 * A new UI with dark mode support, now built on modern browser technologies.
 * Works on most mobile browsers, including Mobile Safari.
@@ -20,7 +20,7 @@ A hosted instance of FilePizza is available at [file.pizza](https://file.pizza).
 ## Development
 
 ```
-$ git clone https://github.com/kern/filepizza.git
+$ git clone https://github.com/jitslabs/share.git
 $ pnpm install
 $ pnpm dev
 $ pnpm build
@@ -49,7 +49,7 @@ $ pnpm docker:down
 
 The server can be customized with the following environment variables:
 
-- `REDIS_URL` – Connection string for a Redis instance used to store channel metadata. If not set, FilePizza falls back to in-memory storage.
+- `REDIS_URL` – Connection string for a Redis instance used to store channel metadata. If not set, JitsLabs Share falls back to in-memory storage.
 - `CLOUDFLARE_TURN_KEY_ID` – Cloudflare Realtime TURN key ID used to request temporary ICE credentials server-side.
 - `CLOUDFLARE_TURN_API_TOKEN` – Cloudflare API token used with the TURN key ID. Keep this server-side only.
 - `CLOUDFLARE_TURN_TTL` – TTL (seconds) for generated Cloudflare TURN credentials. Defaults to `3600`.
@@ -59,7 +59,7 @@ The server can be customized with the following environment variables:
 
 ## FAQ
 
-**How are my files sent?** Your files are sent directly from your browser to the downloader's browser. They never pass through our servers. FilePizza uses WebRTC to send files. This requires that the uploader leave their browser window open until the transfer is complete.
+**How are my files sent?** Your files are sent directly from your browser to the downloader's browser. They never pass through our servers. JitsLabs Share uses WebRTC to send files. This requires that the uploader leave their browser window open until the transfer is complete.
 
 **Can multiple people download my file at once?** Yes! Just send them your short or long URL.
 
@@ -71,4 +71,4 @@ The server can be customized with the following environment variables:
 
 ## License & Acknowledgements
 
-FilePizza is released under the [BSD 3-Clause license](https://github.com/kern/filepizza/blob/main/LICENSE). A huge thanks to [iblowyourdesign](https://dribbble.com/iblowyourdesign) for the pizza illustration.
+JitsLabs Share is released under the [BSD 3-Clause license](https://github.com/jitslabs/share/blob/main/LICENSE). A huge thanks to [iblowyourdesign](https://dribbble.com/iblowyourdesign) for the original illustration.
