@@ -10,15 +10,15 @@ export function ConnectionListItem({
   const getStatusColor = (status: UploaderConnectionStatus) => {
     switch (status) {
       case UploaderConnectionStatus.Uploading:
-        return 'bg-blue-500 dark:bg-blue-600'
+        return 'bg-stone-700 dark:bg-stone-200'
       case UploaderConnectionStatus.Paused:
-        return 'bg-yellow-500 dark:bg-yellow-600'
+        return 'bg-stone-500 dark:bg-stone-400'
       case UploaderConnectionStatus.Done:
-        return 'bg-green-500 dark:bg-green-600'
+        return 'bg-stone-900 dark:bg-stone-100'
       case UploaderConnectionStatus.Closed:
-        return 'bg-red-500 dark:bg-red-600'
+        return 'bg-stone-600 dark:bg-stone-300'
       case UploaderConnectionStatus.InvalidPassword:
-        return 'bg-red-500 dark:bg-red-600'
+        return 'bg-stone-600 dark:bg-stone-300'
       default:
         return 'bg-stone-500 dark:bg-stone-600'
     }
@@ -39,7 +39,7 @@ export function ConnectionListItem({
             )}
           </span>
           <span
-            className={`px-1.5 py-0.5 text-white rounded-md transition-colors duration-200 font-medium text-[10px] ${getStatusColor(
+            className={`px-1.5 py-0.5 text-stone-100 dark:text-stone-900 rounded-md transition-colors duration-200 font-medium text-[10px] ${getStatusColor(
               conn.status,
             )}`}
           >

@@ -16,13 +16,12 @@ export default function ReportedPage(): JSX.Element {
           Message from the management
         </h3>
         <p className="text-sm text-stone-600 dark:text-stone-300 leading-relaxed mb-6">
-          Just like a pizza with questionable toppings, we've had to put this
-          delivery on hold for potential violations of our terms of service. Our
-          delivery quality team is looking into it to ensure we maintain our
-          high standards.
+          This transfer has been paused for a potential violation of our terms
+          of service. Our trust and safety team is reviewing it to help keep
+          Simple Share secure for everyone.
         </p>
         <div className="text-sm text-stone-500 dark:text-stone-400 italic">
-          - The FilePizza Team
+          - The Simple Share Team
         </div>
       </div>
 

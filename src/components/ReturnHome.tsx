@@ -8,7 +8,7 @@ export default function ReturnHome(): JSX.Element {
         href="/"
         className="text-stone-500 dark:text-stone-200 hover:underline"
       >
-        Serve up a fresh slice &raquo;
+        Start a new secure transfer &raquo;
       </Link>
     </div>
   )

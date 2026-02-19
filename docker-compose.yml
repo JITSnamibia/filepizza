@@ -4,7 +4,7 @@ services:
     ports:
       - 6379:6379
     networks:
-      - filepizza
+      - jitslabs-share
     volumes:
       - redis_data:/data
   coturn:
@@ -21,22 +21,22 @@ services:
       - DETECT_RELAY_IP=yes
     command: -n --log-file=stdout --redis-userdb="ip=redis connect_timeout=30"
     networks:
-      - filepizza
-  filepizza:
+      - jitslabs-share
+  jitslabs-share:
     build: .
-    image: kern/filepizza:latest
+    image: kern/jitslabs-share:latest
     ports:
       - 8080:8080
     environment:
       - PORT=8080
       - REDIS_URL=redis://redis:6379
     networks:
-      - filepizza
+      - jitslabs-share
     depends_on:
       - redis
 
 networks:
-  filepizza:
+  jitslabs-share:
     driver: bridge
 
 volumes:
