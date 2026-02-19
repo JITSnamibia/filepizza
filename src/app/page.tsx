@@ -8,7 +8,6 @@ import Uploader from '../components/Uploader'
 import PasswordField from '../components/PasswordField'
 import StartButton from '../components/StartButton'
 import { UploadedFile } from '../types'
-import Spinner from '../components/Spinner'
 import Wordmark from '../components/Wordmark'
 import CancelButton from '../components/CancelButton'
 import { useMemo } from 'react'
@@ -22,7 +21,6 @@ import AddFilesButton from '../components/AddFilesButton'
 function PageWrapper({ children }: { children: React.ReactNode }): JSX.Element {
   return (
     <div className="flex flex-col items-center space-y-5 py-10 max-w-2xl mx-auto px-4">
-      <Spinner direction="up" />
       <Wordmark />
       {children}
     </div>
